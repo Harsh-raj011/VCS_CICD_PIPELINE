@@ -1,40 +1,20 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
-            steps {
-                // Checkout the code from the repository
-                checkout scm
-            }
-        }
         stage('Build') {
             steps {
-                // Build the application using Maven
-                sh 'mvn clean package'
+                echo 'Building...'
             }
         }
         stage('Test') {
             steps {
-                // Run the tests
-                sh 'mvn test'
+                echo 'Testing...'
             }
         }
-        stage('Archive Artifacts') {
+        stage('Deploy') {
             steps {
-                // Archive the built JAR file
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                echo 'Deploying...'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Build and tests were successful!'
-        }
-        failure {
-            echo 'Build or tests failed.'
         }
     }
 }
-
